@@ -15,7 +15,7 @@ img_b64 = base64.b64encode(img_bytes).decode('utf-8')
 message = HumanMessage(
     content=[
         {"type": "text",
-         "text": "O que você vê nesta imagem? Can you describe it?"},
+         "text": "What do you see in this image? Can you describe it?"},
         {
             "type": "image",
             "source_type": "base64",
