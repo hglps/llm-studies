@@ -1,10 +1,12 @@
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import OllamaLLM
+from langchain_community.document_loaders import DirectoryLoader
+
 
 # Testing locally the deepseek-r1 (7B) model
 llm = OllamaLLM(model="deepseek-r1")
 
-response = llm.invoke("Write a linear regression using only numpy in python.")
+response = llm.invoke("Write a linear regression function using only numpy in python.")
 print(response)
 
 for chunk in llm.stream("Who are you?"):
