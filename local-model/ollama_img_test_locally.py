@@ -4,7 +4,7 @@ import base64
 from langchain_core.messages import HumanMessage
 from langchain_ollama import OllamaLLM
 
-llm = OllamaLLM(model="deepseek-r1")
+llm = OllamaLLM(model="llama3.2-vision")
 
 img = Image.open("dog.jpg")
 buffer = BytesIO()
