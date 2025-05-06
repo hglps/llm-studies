@@ -8,7 +8,7 @@ The goal of this repository is to provide a collection of tools, experiments, an
 To install the required dependencies, run:
 
 ```bash
-pip install ollama langchain torch numpy pandas
+pip install ollama langchain torch numpy pandas chromadb sentence-transformers
 ```
 
 ## Usage
