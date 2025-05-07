@@ -8,18 +8,19 @@ class EmbeddingService:
         
     def embed(self, texts):
         return self.model.encode(texts, show_progress_bar=False).tolist()
-    
+
 
 class ChromaClient:
-    def __init__(self, collection_name="article_chunks", persist_dir=".chrome"):
+    def __init__(self, collection_name="article_chunks", persist_dir=".chroma"):
         self.client = chromadb.PersistentClient(
-            Settings(
-                chroma_db_impl="duckdb+parquet",
-                persist_directory=persist_dir,
-            )
+            path="./chroma",
+            # settings= Settings(
+            #         chroma_db_impl="duckdb+parquet",
+            #         persist_directory=persist_dir,
+            # )
         )
         self.collection = self.client.get_or_create_collection(name=collection_name)
-        
+
     def add_chunks(self, article_id, chunks, embeddings):
         ids = [f"{article_id}_{i}" for i in range(len(chunks))]
         metadatas = [{"article_id": article_id, "chunk_id": i} for i in range(len(chunks))]
@@ -30,7 +31,7 @@ class ChromaClient:
             metadatas=metadatas,
             ids=ids
         )
-        
+
     def query(self, query_text, embedding_service, n_results=5):
         query_vector = embedding_service.embed([query_text])[0]
         results = self.collection.query(
