@@ -8,12 +8,35 @@ The goal of this repository is to provide a collection of tools, experiments, an
 To install the required dependencies, run:
 
 ```bash
-pip install ollama langchain torch numpy pandas chromadb sentence-transformers
+conda create --name llm python=3.11
+pip install torch numpy pandas chromadb sentence-transformers langchain
 ```
+
+If running local models, also run:
+```bash
+pip install ollama
+```
+
+Docker Container: To be defined.
 
 ## Usage
 
 ### Running Experiments
+
+In this project, we used redis as the broker for celery in WSL2.
+
+Run:
+
+```bash
+sudo apt update
+sudo apt install redis-server
+
+sudo redis-server --daemonize yes
+
+redis-cli ping
+
+celery -A book_rag worker --loglevel=info
+```
 
 To be defined.
 
