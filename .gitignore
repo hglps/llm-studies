@@ -9,3 +9,4 @@ __pycache__/
 *.chroma
 chroma
 *.sqlite3
+*.pdf

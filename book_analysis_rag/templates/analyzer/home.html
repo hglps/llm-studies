@@ -1,0 +1,11 @@
+{% extends "analyzer/base.html" %}
+{% block content %}
+  <h1>
+    <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">
+        Article Summarizer
+    </a>
+  </h1>
+
+  <p><a href="{% url 'upload_article' %}">Send an article</a></p>
+  <p><a href="{% url 'article_list' %}">View all saved articles</a></p>
+{% endblock %}

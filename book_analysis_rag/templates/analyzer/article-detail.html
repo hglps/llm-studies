@@ -1,0 +1,61 @@
+{% extends "analyzer/base.html" %}
+{% block title %}Article Details – {{ article.title|default:"(Untitled)" }}{% endblock %}
+
+{% block content %}
+  <h1>{{ article.title|default:"(Untitled)" }}</h1>
+  <p><strong>Uploaded on:</strong> {{ article.upload_date|date:"Y-m-d H:i" }}</p>
+  <p><strong>Status:</strong> {{ article.processing_status|capfirst }}</p>
+
+  {% if article.processing_status == 'completed' %}
+    <section>
+      <h2>Summary</h2>
+      <p>{{ analysis.summary }}</p>
+    </section>
+    <section>
+      <h2>Keywords</h2>
+      <ul>
+        {% for kw in analysis.keywords.split(',') %}
+          <li>{{ kw }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section>
+      <h2>Objectives</h2>
+      <p>{{ analysis.objectives }}</p>
+    </section>
+    <section>
+      <h2>Methodology</h2>
+      <p>{{ analysis.methodology }}</p>
+    </section>
+    <section>
+      <h2>Conclusions</h2>
+      <p>{{ analysis.conclusions }}</p>
+    </section>
+    <section>
+      <h2>Suggested Field</h2>
+      <p>{{ analysis.suggested_field }}</p>
+    </section>
+  {% else %}
+    <p>The analysis is still in progress. Please wait a moment and refresh the page.</p>
+  {% endif %}
+
+  {% if article.processing_status == 'indexed' %}
+    <hr>
+    <section id="qa">
+      <h2>Ask the Article</h2>
+      <form id="ask-form" method="post" action="{% url 'article_ask' article.id %}">
+        {% csrf_token %}
+        <div>
+          <textarea name="question" rows="3" style="width:100%;" placeholder="Type your question here..." required></textarea>
+        </div>
+        <button type="submit">Ask</button>
+      </form>
+      {% if answer %}
+        <h3>Answer:</h3>
+        <p>{{ answer }}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  <p><a href="{% url 'article_list' %}">« Back to article list</a></p>
+{% endblock %}

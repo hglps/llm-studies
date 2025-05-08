@@ -1,0 +1,32 @@
+{% extends "analyzer/base.html" %}
+{% block content %}
+  <h1>My articles</h1>
+
+  {% if articles %}
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Upload Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for art in articles %}
+          <tr>
+            <td>
+              <a href="{% url 'article_detail' art.id %}">
+                {{ art.title|default:"(No title)" }}
+              </a>
+            </td>
+            <td>{{ art.upload_date|date:"d/m/Y H:i" }}</td>
+            <td>{{ art.processing_status|capfirst }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You did not send any article yet. <a href="{% url 'upload_article' %}">Send one now.</a></p>
+  {% endif %}
+
+{% endblock %}
