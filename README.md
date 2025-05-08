@@ -9,7 +9,7 @@ To install the required dependencies, run:
 
 ```bash
 conda create --name llm python=3.11
-pip install torch numpy pandas chromadb sentence-transformers langchain
+pip install torch numpy pandas chromadb sentence-transformers PyMuPDF langchain
 ```
 
 If running local models, also run:
