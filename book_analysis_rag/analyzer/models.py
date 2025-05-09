@@ -5,7 +5,6 @@ class Article(models.Model):
     uploaded_file = models.FileField(upload_to='articles/')
     file_type = models.CharField(max_length=30, choices=[
         ('pdf', 'PDF'),
-        ('txt', 'TXT'),
     ])
     upload_date = models.DateTimeField(auto_now_add=True)
     processing_status = models.CharField(max_length=50, default='pending', choices=[
@@ -21,7 +20,9 @@ class Article(models.Model):
     
 
 class ArticleAnalysis(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='analyses')
+    article = models.OneToOneField(Article, on_delete=models.CASCADE, related_name='analyses')
+    year = models.CharField(max_length=4, blank=True, null=True)
+    authors = models.TextField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     keywords = models.TextField(blank=True, null=True)
     objectives = models.TextField(blank=True, null=True)

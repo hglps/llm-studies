@@ -18,13 +18,13 @@
   </header>
 
   <main style="max-width: 800px; margin: auto; padding: 0 1rem;">
-    {% if messages %}
+    {% comment %} {% if messages %}
       <ul class="messages">
         {% for message in messages %}
           <li class="message {{ message.tags }}">{{ message }}</li>
         {% endfor %}
       </ul>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     {% block content %}
     <!-- Conteúdo de cada página será inserido aqui -->
